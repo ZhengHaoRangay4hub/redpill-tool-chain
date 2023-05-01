@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       clean_cache:
-        description: 'Clear caches' #1111
+        description: 'Clear caches'
         required: false
         type: boolean
   push:
@@ -108,18 +108,7 @@ jobs:
           ./redpill_tool_chain.sh add https://github.com/tossp/redpill-tool-chain/raw/master/extensions/redpill-boot-wait.json
           ./redpill_tool_chain.sh add https://github.com/tossp/redpill-tool-chain/raw/master/extensions/redpill-acpid.json
           ./redpill_tool_chain.sh add https://github.com/tossp/redpill-tool-chain/raw/master/extensions/redpill-virtio.json
-	  ./redpill_tool_chain.sh add https://raw.githubusercontent.com/pocopico/rp-ext/master/megaraid_sas/rpext-index.json
-	  ./redpill_tool_chain.sh add https://raw.githubusercontent.com/pocopico/rp-ext/master/igb/rpext-index.json
-	  ./redpill_tool_chain.sh add https://raw.githubusercontent.com/pocopico/rp-ext/master/mpt3sas/rpext-index.json
-	  ./redpill_tool_chain.sh add https://raw.githubusercontent.com/pocopico/rp-ext/master/mpt2sas/rpext-index.json
-	  ./redpill_tool_chain.sh add https://raw.githubusercontent.com/pocopico/rp-ext/master/mptsas/rpext-index.json
-	  ./redpill_tool_chain.sh add https://raw.githubusercontent.com/pocopico/rp-ext/master/bnx2/rpext-index.json
-	  ./redpill_tool_chain.sh add https://raw.githubusercontent.com/pocopico/rp-ext/master/ixgbe/rpext-index.json
-	  ./redpill_tool_chain.sh add https://raw.githubusercontent.com/pocopico/rp-ext/master/r8125/rpext-index.json
-	  ./redpill_tool_chain.sh add https://raw.githubusercontent.com/pocopico/rp-ext/master/r8168/rpext-index.json
-	  ./redpill_tool_chain.sh add https://raw.githubusercontent.com/pocopico/rp-ext/master/redpill-acpid/rpext-index.json
-	  ./redpill_tool_chain.sh add https://raw.githubusercontent.com/pocopico/rp-ext/master/rtl8150/rpext-index.json
-      - name: 添加扩展驱动[dva3221]
+      - name: 添加扩展驱动[dva3221] 显卡相关 已知兼容P4/1650/1050/可进行视频处理
         if: matrix.platform == 'dva3221'
         run: |
           echo '等待整理兼容性扩展~😀'
@@ -133,6 +122,54 @@ jobs:
           ./redpill_tool_chain.sh add https://github.com/tossp/redpill-tool-chain/raw/master/extensions/redpill-dtb.json
           echo '!!!Create your own device tree binary!!!'
           echo 'see https://github.com/jumkey/redpill-load/blob/develop/redpill-dtb/README.md'
+      - name: 添加 火箭系列阵列卡驱动
+        run: |
+          ./redpill_tool_chain.sh add https://raw.githubusercontent.com/pocopico/rp-ext/master/megaraid_sas/rpext-index.json
+      - name: 添加 Intel 1G网卡驱动
+        run: |
+          ./redpill_tool_chain.sh add https://raw.githubusercontent.com/pocopico/rp-ext/master/igb/rpext-index.json
+      - name: 添加 LSI12G系列SAS卡驱动
+        run: |
+          ./redpill_tool_chain.sh add https://raw.githubusercontent.com/pocopico/rp-ext/master/mpt3sas/rpext-index.json
+      - name: 添加 LSI6G系列SAS卡驱动
+        run: |
+          ./redpill_tool_chain.sh add https://raw.githubusercontent.com/pocopico/rp-ext/master/mpt2sas/rpext-index.json
+      - name: 添加 LSI3G系列SAS卡驱动
+        run: |
+          ./redpill_tool_chain.sh add https://raw.githubusercontent.com/pocopico/rp-ext/master/mptsas/rpext-index.json
+      - name: 添加 博通/HPE/HP网卡驱动(1)
+        run: |
+          ./redpill_tool_chain.sh add https://raw.githubusercontent.com/pocopico/rp-ext/master/bnx2/rpext-index.json
+      - name: 添加 博通/HPE/HP网卡驱动(2)
+        run: |
+          ./redpill_tool_chain.sh add https://raw.githubusercontent.com/pocopico/rp-ext/master/bnx2x/rpext-index.json
+      - name: 添加 intel 10G系列网卡驱动
+        run: |
+          ./redpill_tool_chain.sh add https://raw.githubusercontent.com/pocopico/rp-ext/master/ixgbe/rpext-index.json
+      - name: 添加 RTL8125驱动
+        run: |
+          ./redpill_tool_chain.sh add https://raw.githubusercontent.com/pocopico/rp-ext/master/r8125/rpext-index.json
+      - name: 添加 RTL8168驱动
+        run: |
+          ./redpill_tool_chain.sh add https://raw.githubusercontent.com/pocopico/rp-ext/master/r8168/rpext-index.json
+      - name: 添加 RTL8150驱动
+        run: |
+          ./redpill_tool_chain.sh add https://raw.githubusercontent.com/pocopico/rp-ext/master/rtl8150/rpext-index.json
+      - name: 添加 买螺丝IB/CX4系列网卡驱动
+        run: |
+          ./redpill_tool_chain.sh add https://raw.githubusercontent.com/pocopico/rp-ext/master/mlx5_core/rpext-index.json
+      - name: 添加 Intel XL710网卡驱动
+        run: |
+          ./redpill_tool_chain.sh add https://raw.githubusercontent.com/pocopico/rp-ext/master/i40e/rpext-index.json
+      - name: 添加 买螺丝MLX4系列网卡驱动
+        run: |
+          ./redpill_tool_chain.sh add https://raw.githubusercontent.com/pocopico/rp-ext/master/mlx4_core/rpext-index.json
+      - name: 添加 QL系列网卡 1G/10G驱动
+        run: |
+          ./redpill_tool_chain.sh add https://raw.githubusercontent.com/pocopico/rp-ext/master/qlcnic/rpext-index.json
+      - name: 添加 Marvell 88SE6440阵列卡驱动
+        run: |
+          ./redpill_tool_chain.sh add https://raw.githubusercontent.com/pocopico/rp-ext/master/mvsas/rpext-index.json          
       - name: 预处理PAT
         if: endsWith(matrix.version, '42661') && startsWith(matrix.platform, 'ds361')
         run: |
